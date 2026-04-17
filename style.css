@@ -1,0 +1,88 @@
+* { margin: 0; padding: 0; box-sizing: border-box; }
+
+body {
+  font-family: 'Segoe UI', sans-serif;
+  color: #333;
+  background: #f8f9fa;
+}
+
+/* NAVBAR */
+.navbar { background: #1a1a2e; }
+.navbar-brand { color: #e94560 !important; font-weight: 700; font-size: 1.5rem; }
+.nav-link { color: #ccc !important; transition: color 0.3s; }
+.nav-link:hover, .nav-link.active { color: #e94560 !important; }
+
+/* HERO */
+.hero {
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 60%, #0f3460 100%);
+  color: white;
+  padding: 100px 0;
+  text-align: center;
+}
+.hero h1 { font-size: 3rem; font-weight: 700; margin-bottom: 1rem; }
+.hero p { font-size: 1.2rem; color: #aaa; margin-bottom: 2rem; }
+.btn-primary { background: #e94560; border: none; padding: 12px 30px; border-radius: 30px; }
+.btn-primary:hover { background: #c73652; }
+.btn-outline-light { border-radius: 30px; padding: 12px 30px; }
+
+/* SECTION */
+.section-title { font-size: 2rem; font-weight: 700; margin-bottom: 0.5rem; }
+.section-subtitle { color: #888; margin-bottom: 2.5rem; }
+.divider { width: 50px; height: 3px; background: #e94560; margin: 10px auto 20px; }
+
+/* PRODUCT CARD */
+.product-card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.08);
+  transition: transform 0.3s, box-shadow 0.3s;
+  background: white;
+}
+.product-card:hover { transform: translateY(-5px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
+.product-card img { height: 200px; object-fit: cover; width: 100%; }
+.product-card .card-body { padding: 1.2rem; }
+.product-card .price { color: #e94560; font-weight: 700; font-size: 1.1rem; }
+.product-card .old-price { text-decoration: line-through; color: #aaa; font-size: 0.9rem; }
+.badge-sale { background: #e94560; color: white; font-size: 0.75rem; padding: 4px 10px; border-radius: 20px; }
+
+/* FEATURES */
+.feature-box {
+  background: white;
+  border-radius: 12px;
+  padding: 2rem;
+  text-align: center;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.06);
+}
+.feature-box i { font-size: 2.5rem; color: #e94560; margin-bottom: 1rem; }
+
+/* ABOUT */
+.about-img { border-radius: 12px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); }
+.stat-box { background: #1a1a2e; color: white; border-radius: 12px; padding: 1.5rem; text-align: center; }
+.stat-box h3 { color: #e94560; font-size: 2rem; font-weight: 700; }
+
+/* CONTACT */
+.contact-card { background: white; border-radius: 12px; padding: 2rem; box-shadow: 0 2px 15px rgba(0,0,0,0.08); }
+.form-control:focus { border-color: #e94560; box-shadow: 0 0 0 0.2rem rgba(233,69,96,0.15); }
+
+/* LOGIN */
+.login-wrapper {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #1a1a2e, #0f3460);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.login-card { background: white; border-radius: 16px; padding: 2.5rem; width: 100%; max-width: 420px; box-shadow: 0 10px 40px rgba(0,0,0,0.3); }
+.login-card h2 { color: #1a1a2e; font-weight: 700; }
+.login-card .brand { color: #e94560; font-size: 1.8rem; font-weight: 700; }
+
+/* FOOTER */
+footer { background: #1a1a2e; color: #aaa; padding: 40px 0 20px; }
+footer h5 { color: white; margin-bottom: 1rem; }
+footer a { color: #aaa; text-decoration: none; display: block; margin-bottom: 6px; }
+footer a:hover { color: #e94560; }
+.footer-bottom { border-top: 1px solid #333; margin-top: 30px; padding-top: 20px; text-align: center; font-size: 0.9rem; }
+
+/* TOAST */
+.toast-container { position: fixed; bottom: 20px; right: 20px; z-index: 9999; }

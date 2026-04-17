@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopEase - Products</title>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet"/>
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet"/>
+  <link rel="stylesheet" href="style.css"/>
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark sticky-top">
+  <div class="container">
+    <a class="navbar-brand" href="index.html"><i class="bi bi-bag-heart-fill"></i> ShopEase</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#nav">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="nav">
+      <ul class="navbar-nav ms-auto align-items-center">
+        <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+        <li class="nav-item"><a class="nav-link active" href="products.html">Products</a></li>
+        <li class="nav-item"><a class="nav-link" href="about.html">About Us</a></li>
+        <li class="nav-item"><a class="nav-link" href="contact.html">Contact</a></li>
+        <li class="nav-item"><a class="nav-link" href="login.html"><i class="bi bi-person-circle"></i> Login</a></li>
+        <li class="nav-item">
+          <a class="nav-link" href="cart.html">
+            <i class="bi bi-cart3"></i>
+            <span class="cart-badge badge bg-danger rounded-pill">0</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="background:#1a1a2e; color:white; padding:40px 0; text-align:center;">
+  <h2 class="fw-bold">Our Products</h2>
+  <p class="text-muted">Browse our wide range of quality products</p>
+</div>
+
+<section class="py-5">
+  <div class="container">
+    <div class="d-flex flex-wrap gap-2 mb-4 align-items-center justify-content-between">
+      <div class="d-flex gap-2 flex-wrap">
+        <button class="btn btn-primary btn-sm filter-btn active" data-cat="All">All</button>
+        <button class="btn btn-outline-secondary btn-sm filter-btn" data-cat="Electronics">Electronics</button>
+        <button class="btn btn-outline-secondary btn-sm filter-btn" data-cat="Fashion">Fashion</button>
+        <button class="btn btn-outline-secondary btn-sm filter-btn" data-cat="Sports">Sports</button>
+        <button class="btn btn-outline-secondary btn-sm filter-btn" data-cat="Home">Home</button>
+      </div>
+      <input type="text" id="search" class="form-control form-control-sm" placeholder="Search products..." style="max-width:220px;"/>
+    </div>
+    <div class="row g-4" id="product-grid"></div>
+    <p id="no-result" class="text-center text-muted mt-4 d-none">No products found.</p>
+  </div>
+</section>
+
+<!-- TOAST -->
+<div class="toast-container">
+  <div id="cartToast" class="toast align-items-center text-bg-success border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-bottom">© 2026 ShopEase. All rights reserved.</div>
+  </div>
+</footer>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="products-data.js"></script>
+<script src="cart.js"></script>
+<script>
+  let activeCategory = 'All';
+
+  function renderProducts(list) {
+    const grid = document.getElementById('product-grid');
+    const noResult = document.getElementById('no-result');
+    grid.innerHTML = '';
+    if (!list.length) { noResult.classList.remove('d-none'); return; }
+    noResult.classList.add('d-none');
+    list.forEach(p => {
+      grid.innerHTML += `
+        <div class="col-md-3 col-sm-6">
+          <div class="product-card card h-100">
+            <img src="${p.img}" alt="${p.name}"/>
+            <div class="card-body d-flex flex-column">
+              <span class="badge-sale">Sale</span>
+              <h6 class="mt-2 fw-bold">${p.name}</h6>
+              <p class="text-muted small">${p.category}</p>
+              <p class="small text-muted flex-grow-1">${p.desc}</p>
+              <div class="mt-2">
+                <span class="price">₹${p.price}</span>
+                <span class="old-price ms-2">₹${p.oldPrice}</span>
+              </div>
+              <button class="btn btn-primary btn-sm mt-2 w-100" onclick="addToCart(${p.id})">
+                <i class="bi bi-cart-plus"></i> Add to Cart
+              </button>
+            </div>
+          </div>
+        </div>`;
+    });
+  }
+
+  function filter() {
+    const q = document.getElementById('search').value.toLowerCase();
+    const filtered = products.filter(p =>
+      (activeCategory === 'All' || p.category === activeCategory) &&
+      p.name.toLowerCase().includes(q)
+    );
+    renderProducts(filtered);
+  }
+
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => {
+        b.classList.remove('btn-primary', 'active');
+        b.classList.add('btn-outline-secondary');
+      });
+      btn.classList.add('btn-primary', 'active');
+      btn.classList.remove('btn-outline-secondary');
+      activeCategory = btn.dataset.cat;
+      filter();
+    });
+  });
+
+  document.getElementById('search').addEventListener('input', filter);
+  renderProducts(products);
+</script>
+</body>
+</html>
